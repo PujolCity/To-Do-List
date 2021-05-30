@@ -16,7 +16,7 @@ import com.todolist.model.Item;
 import com.todolist.service.api.ItemServiceApi;
 
 @RestController
-@RequestMapping(value = "/api/todo/")
+@RequestMapping(value = "/api/")
 public class ItemRestController {
 	@Autowired
 	private ItemServiceApi itemServiceApi;
@@ -24,6 +24,11 @@ public class ItemRestController {
 	@GetMapping(value = "/all")
 	public List<Item> getAll() {
 		return itemServiceApi.getAll();
+	}
+	
+	@GetMapping(value = "/find/{id}")
+	public Item find(@PathVariable Long id) {
+		return itemServiceApi.get(id);
 	}
 
 	@PostMapping(value = "/save")
@@ -37,9 +42,9 @@ public class ItemRestController {
 		Item obj = itemServiceApi.get(id);
 		if (obj != null) {
 			itemServiceApi.delete(id);
-		}else {
+		} else {
 			return new ResponseEntity<Item>(obj, HttpStatus.INTERNAL_SERVER_ERROR);
-			
+
 		}
 		return new ResponseEntity<Item>(obj, HttpStatus.OK);
 	}
