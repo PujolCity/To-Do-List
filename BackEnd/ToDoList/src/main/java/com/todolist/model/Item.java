@@ -20,7 +20,7 @@ public class Item {
 	private boolean complete;
 
 	@Column
-	private boolean delete;
+	private boolean del;
 	
 
 	public Long getId() {
@@ -48,11 +48,11 @@ public class Item {
 	}
 
 	public boolean isDelete() {
-		return delete;
+		return del;
 	}
 
 	public void setDelete(boolean delete) {
-		this.delete = delete;
+		this.del = delete;
 	}
 
 	

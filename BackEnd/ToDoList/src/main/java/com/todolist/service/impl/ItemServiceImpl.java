@@ -17,7 +17,7 @@ public class ItemServiceImpl extends GenericServiceImpl<Item, Long> implements I
 	
 	@Override	
 	public CrudRepository<Item, Long> getDao() {
-		return this.itemDaoApi;
+		return itemDaoApi;
 	}
 
 }

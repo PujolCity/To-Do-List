@@ -1,11 +1,39 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Items</title>
+<!-- BOOTSTRAP CSS -->
+<link href="../static/css/bootstrap.css" rel="stylesheet"
+	th:href="@{/css/bootstrap.css}">
 </head>
 <body>
-
+	<div class="container">
+		<br>
+		<div>
+			<a href="/save/0" class="btn btn-primary"> Agregar</a>
+		</div>
+		<div th:switch="${list}">
+			<h2 th:if="${list.isEmpty()}">No hay Items</h2>
+			<div th:if="${!list.isEmpty()}">
+				<h2>Items</h2>
+				<table class="table">
+					<thead>
+						<tr>
+							<th>Task</th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="item : ${list}">
+							<td th:text="${item.name}">
+							<td><a th:href="@{/save/{id}(id=${item.id})}"> Edit</a></td>
+							<td><a th:href="@{/delete/{id}(id=${item.id})}"> Delete</a></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
 </body>
 </html>
-

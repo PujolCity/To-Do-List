@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Items</title>
+<!-- BOOTSTRAP CSS -->
+<link href="../static/css/bootstrap.css" rel="stylesheet"
+	th:href="@{/css/bootstrap.css}">
+</head>
+<body>
+	<div class="container">
+		<h2>AGREGAR PERSONA</h2>
+		<br>
+		<form action="#" th:action="@{/save}" class="form-group"
+			th:object="${item}" method="post">
+			<div class="form-group">
+				<label for="name"> Task </label> <input type="text"
+					class="form-control" id="nombre" th:field="*{name}" name="name">
+			</div>
+		 	<div class="form-group">
+				<label for="name"> Check </label> <input type="checkbox"
+					class="form-control" id="complete" th:field="*{complete}"
+					name="complete">
+			</div> 
+			<input type="hidden" th:field="*{id}" name="id" id="id">
+			<br>
+			<button type="submit" class="btn btn-succes">Guardar</button>
+		</form>
+	</div>
+</body>
+</html>

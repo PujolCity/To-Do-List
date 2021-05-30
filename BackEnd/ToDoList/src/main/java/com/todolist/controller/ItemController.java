@@ -1,5 +1,6 @@
 package com.todolist.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,6 +14,7 @@ import com.todolist.service.api.ItemServiceApi;
 @Controller
 public class ItemController {
 	
+	@Autowired
 	private ItemServiceApi itemServiceApi;
 	
 	@RequestMapping("/")
@@ -23,8 +25,10 @@ public class ItemController {
 	
 	@GetMapping("/save/{id}")
 	public String showSave(@PathVariable("id") Long id, Model model) {
-		if(id != null) {
+		if(id != null && id!= 0) {
 			model.addAttribute("item", itemServiceApi.get(id));
+		} else {
+			model.addAttribute("item",new Item());
 		}
 		return "save";
 	}
@@ -35,7 +39,7 @@ public class ItemController {
 		return "redirect:/";
 	}
 	
-	
+	@GetMapping("/delete/{id}")
 	public String delete(@PathVariable("id") Long id, Model model) {
 		itemServiceApi.delete(id);
 		return "redirect:/";
