@@ -5,6 +5,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 public class Item {
@@ -19,7 +23,12 @@ public class Item {
 	@Column
 	private boolean complete;
 	
+	@ManyToOne
+    @JoinColumn(name="folder_id", nullable=true)
+	@JsonBackReference
+    private Folder folder;
 
+	
 	public Long getId() {
 		return id;
 	}
@@ -43,6 +52,16 @@ public class Item {
 	public void setComplete(boolean complete) {
 		this.complete = complete;
 	}
+
+	public Folder getFolder() {
+		return folder;
+	}
+
+	public void setFolder(Folder folder) {
+		this.folder = folder;
+	}
+	
+	
 
 	
 }

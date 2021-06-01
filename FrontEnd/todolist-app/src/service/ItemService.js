@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export class ItemService{
-        baseUrl = "http://localhost:8080/api"
+        baseUrl = "http://localhost:8080/api/item"
     
         getAll(){
             return axios.get(this.baseUrl + "/all").then(res => res.data);

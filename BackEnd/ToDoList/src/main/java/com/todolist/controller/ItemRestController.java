@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,7 +17,8 @@ import com.todolist.model.Item;
 import com.todolist.service.api.ItemServiceApi;
 
 @RestController
-@RequestMapping(value = "/api/")
+@RequestMapping(value = "/api/item")
+@CrossOrigin(origins="http://localhost:3000")
 public class ItemRestController {
 	@Autowired
 	private ItemServiceApi itemServiceApi;
@@ -36,7 +38,16 @@ public class ItemRestController {
 		Item obj = itemServiceApi.save(item);
 		return new ResponseEntity<Item>(obj, HttpStatus.OK);
 	}
-
+	
+	@PostMapping(value = "/completetask/{id}")
+	public ResponseEntity<Item> completeTask(@PathVariable Long id) {
+		Item obj = itemServiceApi.get(id);
+		if (obj != null) {
+			}
+		return new ResponseEntity<Item>(obj, HttpStatus.OK);
+		
+	}
+	
 	@PostMapping(value = "/delete/{id}")
 	public ResponseEntity<Item> delete(@PathVariable Long id) {
 		Item obj = itemServiceApi.get(id);
